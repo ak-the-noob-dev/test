@@ -38,8 +38,8 @@ app.use("/profiles", profile);
 const transporter = nodemailer.createTransport({
   service: "gmail",
   auth: {
-    user: process.env.MAILSERVER_USER || "mnestest3000@gmail.com",
-    pass: process.env.MAILSERVER_PASS || "aoftqcepribbcwwp",
+    user: __env.MAILSERVER_USER || "mnestest3000@gmail.com",
+    pass: __env.MAILSERVER_PASS || "aoftqcepribbcwwp",
   },
 });
 
@@ -101,8 +101,8 @@ app.get("/", (req, res) => {
   res.send("SERVER IS RUNNING");
 });
 
-const DB_URL = process.env.DB_URL || "mongodb://13.235.28.167:27017/test";
-const PORT = process.env.PORT || 5000;
+const DB_URL = __env.DB_URL || "mongodb://13.235.28.167:27017/test";
+const PORT = __env.PORT || 5000;
 
 mongoose
   .connect(DB_URL, { useNewUrlParser: true, useUnifiedTopology: true })

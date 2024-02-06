@@ -5,7 +5,7 @@ import bcrypt from "bcryptjs";
 import dotenv from "dotenv";
 
 dotenv.config();
-const SECRET = process.env.SECRET;
+const SECRET = __env.SECRET;
 
 import User from "../models/userModel.js";
 import ProfileModel from "../models/ProfileModel.js";
@@ -100,8 +100,8 @@ export const forgotPassword = (req, res) => {
   const transporter = nodemailer.createTransport({
     service: "gmail",
     auth: {
-      user: process.env.MAILSERVER_USER || "mnestest3000@gmail.com",
-      pass: process.env.MAILSERVER_PASS || "aoftqcepribbcwwp",
+      user: __env.MAILSERVER_USER || "mnestest3000@gmail.com",
+      pass: __env.MAILSERVER_PASS || "aoftqcepribbcwwp",
     },
   });
 
