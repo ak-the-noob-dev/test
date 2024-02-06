@@ -23,7 +23,9 @@ import emailTemplate from "./documents/email.js";
 
 const app = express();
 dotenv.config({ path: "./.env" });
-process.env = app.use(express.json({ limit: "30mb", extended: true }));
+global.__env = process.env;
+
+app.use(express.json({ limit: "30mb", extended: true }));
 app.use(express.urlencoded({ limit: "30mb", extended: true }));
 app.use(cors());
 
