@@ -7,3 +7,4 @@
 /server/node_modules
 *.yml
 *.md
+ecosystem.config.js

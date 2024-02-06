@@ -22,9 +22,8 @@ import pdfTemplate from "./documents/index.js";
 import emailTemplate from "./documents/email.js";
 
 const app = express();
-dotenv.config();
-
-app.use(express.json({ limit: "30mb", extended: true }));
+dotenv.config({ path: "./.env" });
+process.env = app.use(express.json({ limit: "30mb", extended: true }));
 app.use(express.urlencoded({ limit: "30mb", extended: true }));
 app.use(cors());
 
@@ -100,7 +99,7 @@ app.get("/", (req, res) => {
   res.send("SERVER IS RUNNING");
 });
 
-const DB_URL = process.env.DB_URL;
+const DB_URL = process.env.DB_URL || "mongodb://13.235.28.167:27017/test";
 const PORT = process.env.PORT || 5000;
 
 mongoose
