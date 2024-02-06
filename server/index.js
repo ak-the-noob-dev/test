@@ -20,10 +20,10 @@ import profile from "./routes/profile.js";
 import pdfTemplate from "./documents/index.js";
 // import invoiceTemplate from './documents/invoice.js'
 import emailTemplate from "./documents/email.js";
+import { __env } from "./configs.js";
 
 const app = express();
 dotenv.config({ path: "./.env" });
-global.__env = process.env;
 
 app.use(express.json({ limit: "30mb", extended: true }));
 app.use(express.urlencoded({ limit: "30mb", extended: true }));

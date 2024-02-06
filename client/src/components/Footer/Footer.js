@@ -11,7 +11,9 @@ const Footer = () => {
   }, [location]);
   return (
     <footer>
-      <div className={styles.footerText}>This is test App </div>
+      <div className={styles.footerText}>
+        This Application is not owned by us.
+      </div>
     </footer>
   );
 };
