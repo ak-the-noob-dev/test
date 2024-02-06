@@ -42,6 +42,7 @@ export const signin = async (req, res) => {
     //Then send the token to the client/frontend
     res.status(200).json({ result: existingUser, userProfile, token });
   } catch (error) {
+    console.log(error);
     res.status(500).json({ message: "Something went wrong" });
   }
 };
