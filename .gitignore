@@ -1,0 +1,9 @@
+/client/node_modules
+/client/nginx.conf
+/client/Dockerfile
+/client/build
+
+/server/Procfile
+/server/node_modules
+*.yml
+*.md
