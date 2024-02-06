@@ -10,8 +10,8 @@ import { __env } from "../configs.js";
 const SECRET = __env.SECRET;
 
 export const signin = async (req, res) => {
-  const { email, password } = req.body; //Coming from formData
-
+  const { email, password } = req.body;
+  console.log(SECRET);
   try {
     const existingUser = await User.findOne({ email });
 
