@@ -55,7 +55,7 @@ app.post("/send-pdf", async (req, res) => {
     const browser =
       __env.MACHINE === "LINUX"
         ? await puppeteer.launch({
-            executablePath: "/usr/bin/chromium-browser",
+            executablePath: "/snap/bin/chromium",
           })
         : await puppeteer.launch();
     const page = await browser.newPage();
