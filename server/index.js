@@ -46,36 +46,40 @@ const transporter = nodemailer.createTransport({
 var options = { format: "A4" };
 //SEND PDF INVOICE VIA EMAIL
 app.post("/send-pdf", (req, res) => {
+  console.log("api called ", req.body);
   const { email, company } = req.body;
+  try {
+    // pdf.create(pdfTemplate(req.body), {}).toFile('invoice.pdf', (err) => {
+    pdf.create(pdfTemplate(req.body), options).toFile("invoice.pdf", (err) => {
+      // send mail with defined transport object
+      transporter.sendMail({
+        from: ` Mnes <mnestest3000@gmail.com>`, // sender address
+        to: `${email}`, // list of receivers
+        replyTo: `${company.email}`,
+        subject: `Invoice from ${
+          company.businessName ? company.businessName : company.name
+        }`, // Subject line
+        text: `Invoice from ${
+          company.businessName ? company.businessName : company.name
+        }`, // plain text body
+        html: emailTemplate(req.body), // html body
+        attachments: [
+          {
+            filename: "invoice.pdf",
+            path: `${__dirname}/invoice.pdf`,
+          },
+        ],
+      });
 
-  // pdf.create(pdfTemplate(req.body), {}).toFile('invoice.pdf', (err) => {
-  pdf.create(pdfTemplate(req.body), options).toFile("invoice.pdf", (err) => {
-    // send mail with defined transport object
-    transporter.sendMail({
-      from: ` Mnes <mnestest3000@gmail.com>`, // sender address
-      to: `${email}`, // list of receivers
-      replyTo: `${company.email}`,
-      subject: `Invoice from ${
-        company.businessName ? company.businessName : company.name
-      }`, // Subject line
-      text: `Invoice from ${
-        company.businessName ? company.businessName : company.name
-      }`, // plain text body
-      html: emailTemplate(req.body), // html body
-      attachments: [
-        {
-          filename: "invoice.pdf",
-          path: `${__dirname}/invoice.pdf`,
-        },
-      ],
+      if (err) {
+        console.log(err);
+        res.send(Promise.reject());
+      }
+      res.send(Promise.resolve());
     });
-
-    if (err) {
-      console.log(err);
-      res.send(Promise.reject());
-    }
-    res.send(Promise.resolve());
-  });
+  } catch (error) {
+    console.log("api error ", error);
+  }
 });
 
 //Problems downloading and sending invoice
