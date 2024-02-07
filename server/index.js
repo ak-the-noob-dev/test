@@ -71,6 +71,7 @@ app.post("/send-pdf", (req, res) => {
     });
 
     if (err) {
+      console.log(err);
       res.send(Promise.reject());
     }
     res.send(Promise.resolve());
