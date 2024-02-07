@@ -52,7 +52,12 @@ const puppeteerOptions = {
 app.post("/send-pdf", async (req, res) => {
   const { email, company } = req.body;
   try {
-    const browser = await puppeteer.launch();
+    const browser =
+      __env.MACHINE === "LINUX"
+        ? await puppeteer.launch({
+            executablePath: "/usr/bin/chromium-browser",
+          })
+        : await puppeteer.launch();
     const page = await browser.newPage();
     await page.setContent(pdfTemplate(req.body)); // Assuming pdfTemplate generates HTML content
     await page.pdf({ path: "invoice.pdf", format: "A4" });
